@@ -7,14 +7,6 @@ Welcome to the Spring AI Chat Bot project! This application demonstrates how to 
 This project showcases the integration of Spring AI with Spring Boot to create a chatbot that supports both traditional request-response interactions and streaming responses. It's an excellent starting point for developers looking to implement AI-powered chat functionality in their Spring applications.
 
 
-## Dependencies
-
-The project relies on the following key dependencies:
-
-- `spring-boot-starter-web`: For building web applications with Spring MVC
-- `spring-ai-anthropic-spring-boot-starter`: Spring AI starter for Anthropic's AI models
-- `spring-boot-starter-test`: For testing Spring Boot applications
-
 ## Getting Started
 
 To get started with this project, ensure you have Java 23 and Maven installed on your system. Then, follow these steps:
@@ -46,21 +38,26 @@ The application will start, and you'll be able to access the chat endpoints.
 
 Once the application is running, you can interact with it using the following endpoints:
 
-1. Traditional chat (POST request):
+1. Streaming chat (GET request):
+   ```
+   GET http://localhost:8080/stream?message=Your message here
+   ```
+2. Traditional chat (POST request):
    ```
    POST http://localhost:8080/chat?message=Your message here
    ```
 
-2. Streaming chat (GET request):
-   ```
-   GET http://localhost:8080/stream?message=Your message here
-   ```
-
-You can use tools like cURL, Postman, or create a simple frontend to interact with these endpoints. I like to use [httpie](https://httpie.io/) with the `--stream` option 
+For the purpose of this demo, I have served 2 static webpages to test the chatbot:
+1. Streaming Chatbot
 
 ```
-http --stream :8080/stream message=="Write a short overview of generative AI"
+http://localhost:8080/stream.html
 ```
+2. Traditional Chatbot
+```
+http://localhost:8080/index.html
+```
+You can also use tools like cURL, Postman, or create a simple frontend to interact with these endpoints. 
 
 ## Relevant Code Examples
 
@@ -101,17 +98,6 @@ This controller demonstrates two key methods:
 1. `chat`: Handles traditional request-response interactions.
 2. `chatWithStream`: Provides a streaming response using Spring WebFlux's `Flux`.
 
-### Application Configuration
-
-The `Application` class is a standard Spring Boot application class:
-
-```java
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
-}
 ```
 
 This class bootstraps the Spring application context and runs the embedded web server.
@@ -122,6 +108,14 @@ This class bootstraps the Spring application context and runs the embedded web s
 - Maven 3.6.3 or newer
 - Spring Boot 3.3.4
 - Spring AI 1.0.0-M2
+
+- ## Dependencies
+
+The project relies on the following key dependencies:
+
+- `spring-boot-starter-web`: For building web applications with Spring MVC
+- `spring-ai-anthropic-spring-boot-starter`: Spring AI starter for Anthropic's AI models
+- `spring-boot-starter-test`: For testing Spring Boot applications
 
 ## Conclusion
 
